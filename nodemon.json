@@ -1,0 +1,7 @@
+{
+    "env":{
+        "MONGO_USER":"omrubik",
+        "MONGO_PASSWORD":"om1234",
+        "MONGO_DATABASE":"StoreDB"
+    }
+}
