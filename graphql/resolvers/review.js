@@ -11,9 +11,9 @@ module.exports = {
     });
   },
   addReview: async (args,req) => {
-    if(!req.isAuth){
-      throw new Error("Unauthenticated")
-    }
+    // if(!req.isAuth){
+    //   throw new Error("Unauthenticated")
+    // }
     try {
       const product = await Product.findById(args.reviewInput.productID);
       const user = await User.findById(args.reviewInput.userID);

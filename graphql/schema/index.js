@@ -3,7 +3,7 @@ const { buildSchema } = require("graphql");
 module.exports = buildSchema(`
 
 type Cart{
-  product: Product!
+  product: Product
 }
 
 
@@ -187,7 +187,7 @@ orders: [Orders!]!
 type RootMutation{
   addReview(reviewInput: ReviewInput): Review,
   addSearchProduct(searchProductInput: SearchProductInput): SearchProducts,
-  addToCart(productID: String! , userID: String!): Cart,
+  addToCart(productID: String , userID: String): Cart,
 
   createUser(userInput:UserInput):User,
   createProduct(productInput: ProductInput): Product,

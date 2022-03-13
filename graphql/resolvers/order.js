@@ -107,9 +107,9 @@ module.exports = {
   },
 
   removeFromCart: async (args, req) => {
-    if (!req.isAuth) {
-      throw new Error("Unauthenticated");
-    }
+    // if (!req.isAuth) {
+    //   throw new Error("Unauthenticated");
+    // }
     const product = await Product.findById(args.productID);
     console.log(product.id);
     const user = await User.findById(args.userID);
