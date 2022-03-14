@@ -7,6 +7,8 @@ type Cart{
 }
 
 
+
+
 type Address{
   add1: String!
   landmark: String
@@ -181,6 +183,7 @@ searchproducts: [SearchProducts!]!
 orders: [Orders!]!
 
 
+productByCollection(collectionName: String!): [Product]
 
 }
 
@@ -199,8 +202,6 @@ type RootMutation{
   updateOrder(updateOrderInput: UpdateOrder):Orders,
   updateProduct(productInput: ProductInput): Product
 
-
-  productByCollection(collectionName: String!): [Product!]!
   login(email: String! , password: String!): AuthData
 
 }

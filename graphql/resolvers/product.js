@@ -98,19 +98,20 @@ module.exports = {
     }
   },
 
-  productByCollection: (args) => {
-    return Product.find({ category: args.collectionName })
-      .then((products) => {
-        return products.map((product) => {
-          return {
-            ...product._doc,
-            createdAt: new Date(product._doc.createdAt).toISOString(),
-            updatedAt: new Date(product._doc.updatedAt).toISOString(),
-          };
-        });
-      })
-      .catch((err) => {
-        throw new Error(err);
+  productByCollection: async (args) => {
+    try {
+      const ProductsByCollection = await Product.find({
+        category: args.collectionName,
       });
+      return ProductsByCollection.map((products)=>{
+        return {
+          ...products._doc,
+          createdAt: new Date(products._doc.createdAt).toISOString(),
+          updatedAt: new Date(products._doc.updatedAt).toISOString(),
+        };
+      })
+    } catch (e) {
+      throw new Error(e);
+    }
   },
 };
