@@ -74,7 +74,7 @@ module.exports = {
       product.weight = +args.productInput.weight;
       product.category = -args.productInput.category;
       product.company = args.productInput.company;
-      product.save();
+      await product.save();
       return {
         ...product._doc,
         createdAt: new Date(product._doc.createdAt).toISOString(),
