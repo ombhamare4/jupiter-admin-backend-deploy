@@ -8,7 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon app.js"
+    "start": "node app.js NODE_ENV=production MONGO_USER=omrubik MONGO_PASSWORD=om1234 MONGO_DATABASE=StoreDB ",
+    "start-server": "nodemon app.js",
+    "start:dev": "nodemon app.js"
   },
   "keywords": [],
   "author": "",
@@ -16,13 +18,16 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.1",
+    "compression": "^1.7.4",
     "express": "^4.17.2",
     "express-graphql": "^0.12.0",
     "graphql": "^16.2.0",
+    "helmet": "^5.0.2",
     "jsonwebtoken": "^8.5.1",
     "mongodb": "^4.3.1",
     "mongoose": "^6.1.8",
     "mongoose-paginate": "^5.0.3",
+    "morgan": "^1.10.0",
     "nodemon": "^2.0.15"
   }
 }
