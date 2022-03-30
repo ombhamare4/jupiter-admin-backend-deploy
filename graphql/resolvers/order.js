@@ -45,9 +45,9 @@ module.exports = {
   },
 
   createOrder: (args, req) => {
-    if (!req.isAuth) {
-      throw new Error("Unauthenticated");
-    }
+    // if (!req.isAuth) {
+    //   throw new Error("Unauthenticated");
+    // }
     const orderProduct = args.orderInput.orderProducts.map((products) => {
       const result = products.productID;
       return result;
@@ -59,6 +59,7 @@ module.exports = {
         lastName: args.orderInput.name.lastName,
       },
       user: args.orderInput.userID,
+      phoneNo:args.orderInput.phoneNo,
       address: {
         add1: args.orderInput.address.add1,
         landmark: args.orderInput.address.landmark,

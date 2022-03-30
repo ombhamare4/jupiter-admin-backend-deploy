@@ -1,13 +1,9 @@
 const { buildSchema } = require("graphql");
 
 module.exports = buildSchema(`
-
 type Cart{
   product: Product
 }
-
-
-
 
 type Address{
   add1: String!
@@ -51,6 +47,7 @@ type Orders{
   _id: ID!
   user: User!
   name: Name!
+  phoneNo:Int!
   address:  Address!
   orderProducts: [OrdersProductList!]!
   orderStatus: Boolean!
@@ -61,6 +58,7 @@ type Orders{
 input OrderInput{
   userID: String!
   name: NameInput!
+  phoneNo: String!
   address: AddressInput!
   orderProducts: [OrdersProductListInput!]!
 }
@@ -135,8 +133,6 @@ input ProductInput{
   category: String!
   company: String!
 }
-
-
 
 type Name{
   firstName: String!
