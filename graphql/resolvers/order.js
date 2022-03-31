@@ -10,32 +10,12 @@ const transfromUserProducts = (order) => {
     _id: order.id,
     orderProducts: productsByIDs.bind(this, order._doc.orderProducts),
     user: userById.bind(this, order._doc.user),
+    createdAt: new Date(order._doc.createdAt).toISOString(),
+    updatedAt: new Date(order._doc.updatedAt).toISOString(),
   };
 };
 
 module.exports = {
-  updateOrder: (args) => {
-    return Order.findById(args.updateOrderInput.orderID)
-      .then((order) => {
-        let orderProductsIds = order.orderProducts;
-        return Product.find({ _id: { $in: orderProductsIds } })
-          .then((products) => {
-            return products.map((product) => {
-              product.available = product.available - 1;
-              console.log(product);
-              product.save();
-              return transfromUserProducts(order);
-            });
-          })
-          .catch((err) => {
-            throw new Error(err);
-          });
-      })
-      .catch((err) => {
-        throw new Error(err);
-      });
-  },
-
   orders: async () => {
     const orders = await Order.find();
     const orderlist = orders.map((order) => {
@@ -44,10 +24,19 @@ module.exports = {
     return orderlist;
   },
 
-  createOrder: (args, req) => {
-    if (!req.isAuth) {
-      throw new Error("Unauthenticated");
+  orderById: async (args) => {
+    try {
+      const order = await Order.findById(args.orderId);
+      return transfromUserProducts(order);
+    } catch (e) {
+      throw new Error(e);
     }
+  },
+
+  createOrder: (args, req) => {
+    // if (!req.isAuth) {
+    //   throw new Error("Unauthenticated");
+    // }
     const orderProduct = args.orderInput.orderProducts.map((products) => {
       const result = products.productID;
       return result;
@@ -80,6 +69,28 @@ module.exports = {
           .then((orders) => {
             console.log(user);
             return transfromUserProducts(orders);
+          })
+          .catch((err) => {
+            throw new Error(err);
+          });
+      })
+      .catch((err) => {
+        throw new Error(err);
+      });
+  },
+
+  updateOrder: (args) => {
+    return Order.findById(args.updateOrderInput.orderID)
+      .then((order) => {
+        let orderProductsIds = order.orderProducts;
+        return Product.find({ _id: { $in: orderProductsIds } })
+          .then((products) => {
+            return products.map((product) => {
+              product.available = product.available - 1;
+              console.log(product);
+              product.save();
+              return transfromUserProducts(order);
+            });
           })
           .catch((err) => {
             throw new Error(err);

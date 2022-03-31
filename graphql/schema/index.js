@@ -29,8 +29,6 @@ input AddressInput{
   pincode: Int!
 }
 
-
-
 type OrdersProductList{
   product: Product!
 }
@@ -52,6 +50,7 @@ type Orders{
   user: User!
   name: Name!
   address:  Address!
+  phoneNo: String
   orderProducts: [OrdersProductList!]!
   orderStatus: Boolean!
   createdAt: String!
@@ -181,8 +180,7 @@ products:[Product!]!
 productByID(productId: String!): Product!
 searchproducts: [SearchProducts!]!
 orders: [Orders!]!
-
-
+orderById(orderId:String!): Orders!
 productByCollection(collectionName: String!): [Product]
 
 }
