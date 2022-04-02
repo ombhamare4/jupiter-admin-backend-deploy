@@ -42,7 +42,6 @@ type Orders{
   _id: ID!
   user: User!
   name: Name!
-  phoneNo:Int!
   address:  Address!
   orderProducts: [OrdersProductList!]!
   orderStatus: Boolean!
