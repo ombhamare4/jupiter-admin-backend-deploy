@@ -2,25 +2,6 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-//delivery Address :
-// Phone Number
-/*
-first name
-last name
-email
-phone number
-
-address{
-  add1: String!
-  landmark: String
-  street: String
-  City: String!
-  state:String!
-  country: String!
-  pincode: Number!
-}
-*/
-
 const OrdersSchema = new Schema(
   {
     name: {
