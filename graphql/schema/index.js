@@ -52,7 +52,6 @@ type Orders{
 input OrderInput{
   userId: String!
   name: NameInput!
-  phoneNo: String!
   address: AddressInput!
 }
 
@@ -84,7 +83,6 @@ input PriceInput{
   originalPrice: Float!
   discountPrice: Float!
 }
-
 
 type Review{
   rating: Int!
