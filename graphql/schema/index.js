@@ -3,11 +3,8 @@ const { buildSchema } = require("graphql");
 module.exports = buildSchema(`
 
 type Cart{
-  product: Product
+  product: [Product!]
 }
-
-
-
 
 type Address{
   add1: String!
@@ -15,8 +12,8 @@ type Address{
   street: String
   city: String!
   state: String!
-  country: String!
   pincode: Int!
+  phoneNo:String!
 }
 
 input AddressInput{
@@ -25,8 +22,8 @@ input AddressInput{
   street: String
   city: String!
   state: String!
-  country: String!
   pincode: Int!
+  phoneNo:String!
 }
 
 type OrdersProductList{
@@ -37,12 +34,9 @@ input  OrdersProductListInput{
   productID: String!
 }
 
-
-
 input UpdateOrder{
   orderID: String!
 }
-
 
 
 type Orders{
@@ -50,7 +44,6 @@ type Orders{
   user: User!
   name: Name!
   address:  Address!
-  phoneNo: String
   orderProducts: [OrdersProductList!]!
   orderStatus: Boolean!
   createdAt: String!
@@ -58,12 +51,10 @@ type Orders{
 }
 
 input OrderInput{
-  userID: String!
+  userId: String!
   name: NameInput!
   address: AddressInput!
-  orderProducts: [OrdersProductListInput!]!
 }
-
 
 
 type SearchProducts{
@@ -79,6 +70,9 @@ input SearchProductInput{
   userID: String!
 }
 
+type UserCart{
+  product: Product!
+}
 
 
 type Price{
@@ -90,7 +84,6 @@ input PriceInput{
   originalPrice: Float!
   discountPrice: Float!
 }
-
 
 
 type Review{
@@ -105,8 +98,6 @@ input ReviewInput{
   comment: String!
   userID: String!
 }
-
-
 
 type Product{
   _id: ID!
@@ -135,8 +126,6 @@ input ProductInput{
   company: String!
 }
 
-
-
 type Name{
   firstName: String!
   lastName: String!
@@ -147,8 +136,6 @@ input NameInput{
   lastName: String!
 }
 
-
-
 type User{
   _id: ID!
   name: Name!
@@ -156,7 +143,7 @@ type User{
   password: String!
   searchproducts: [SearchProducts!]
   orderHistory: [Orders!]!
-  cart: [Cart!]
+  cart: [UserCart!]
   createdAt: String!
   updatedAt: String!
 }
@@ -180,6 +167,7 @@ products:[Product!]!
 productByID(productId: String!): Product!
 searchproducts: [SearchProducts!]!
 orders: [Orders!]!
+ship:[Orders!]!
 orderById(orderId:String!): Orders!
 productByCollection(collectionName: String!): [Product]
 
@@ -194,8 +182,10 @@ type RootMutation{
   createProduct(productInput: ProductInput): Product,
   createOrder(orderInput: OrderInput): Orders,
 
-  removeFromCart(productID: String! , userID: String!): Cart,
+  removeFromCart(productID: String! , userID: String!): UserCart,
   removeProduct(productId: String!):Product
+
+  shipOrder(orderId:String!): Orders,
 
   updateOrder(updateOrderInput: UpdateOrder):Orders,
   updateProduct(productInput: ProductInput): Product
