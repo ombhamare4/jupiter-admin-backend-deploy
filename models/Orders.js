@@ -16,7 +16,7 @@ const OrdersSchema = new Schema(
 
     address: {
       add1: { type: String, required: true },
-      landmarrk: { type: String },
+      landmark: { type: String },
       street: { type: String },
       city: { type: String, required: true },
       state: { type: String, required: true },
