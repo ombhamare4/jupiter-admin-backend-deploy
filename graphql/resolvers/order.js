@@ -108,7 +108,6 @@ module.exports = {
           street: args.orderInput.address.street,
           city: args.orderInput.address.city,
           state: args.orderInput.address.state,
-          // country: args.orderInput.address.country,
           pincode: args.orderInput.address.pincode,
           phoneNo:args.orderInput.address.phoneNo
         },
