@@ -113,6 +113,7 @@ module.exports = {
         },
         orderProducts: orderProduct,
       });
+      console.log(order);
       await user.ordersHistory.push(order);
       user.cart = [];
       await user.save();
