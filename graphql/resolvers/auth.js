@@ -1,8 +1,21 @@
 const { userById, productByID, productsByIDs, orderByIDs } = require("./merge");
 
 const bcrypt = require("bcryptjs");
+const nodemailer = require("nodemailer");
+const sendGridTransport = require("nodemailer-sendgrid-transport");
+
 const User = require("../../models/User");
 const jwt = require("jsonwebtoken");
+
+const transport = nodemailer.createTransport(
+  sendGridTransport({
+    auth: {
+      // api_user:,
+      api_key:
+        "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",
+    },
+  })
+);
 
 const transformUser = (user) => {
   return {
@@ -77,6 +90,12 @@ module.exports = {
           password: hashpassword,
         });
         return user.save().then((users) => {
+          transport.sendMail({
+            to:"om.rubiksDev@gmail.com",
+            from:"om.rubiksDev@gmail.com",
+            subject:"Register Successfull",
+            html:"<h1>Thank you for be with us</h1>"
+          })
           return transformUser(users);
         });
       })

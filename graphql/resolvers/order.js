@@ -109,11 +109,10 @@ module.exports = {
           city: args.orderInput.address.city,
           state: args.orderInput.address.state,
           pincode: args.orderInput.address.pincode,
-          phoneNo:args.orderInput.address.phoneNo
+          phoneNo: args.orderInput.address.phoneNo,
         },
         orderProducts: orderProduct,
       });
-      console.log(order);
       await user.ordersHistory.push(order);
       user.cart = [];
       await user.save();
@@ -151,15 +150,16 @@ module.exports = {
       const user = await User.findById(order.user);
 
       //Order Status Update:
-      order.orderStatus = true;
+
+      order.orderStatus = false;
       await order.save();
 
       //Product count Update
-      let productIds = user.cart;
+      let productIds = order.orderProducts;
       const productList = await Product.find({ _id: { $in: productIds } });
-      productList.map((product) => {
+       productList.map((product) => {
         product.available = product.available - 1;
-        product.save();
+         product.save();
       });
       return transfromUserProducts(order);
     } catch (e) {
