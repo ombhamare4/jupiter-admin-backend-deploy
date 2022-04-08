@@ -151,7 +151,7 @@ module.exports = {
 
       //Order Status Update:
 
-      order.orderStatus = false;
+      order.orderStatus = true;
       await order.save();
 
       //Product count Update
