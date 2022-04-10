@@ -92,6 +92,7 @@ module.exports = {
             to: args.userInput.email,
             subject: "Register Successfull",
             text: "Welcome to Jupiter World",
+            html: "<h1>Register Done</h1>",
           };
 
           transporter.sendMail(mailOptions, function (error, info) {

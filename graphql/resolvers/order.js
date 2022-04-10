@@ -1,6 +1,15 @@
 const Order = require("../../models/Orders");
 const Product = require("../../models/Product");
 const User = require("../../models/User");
+const nodemailer = require("nodemailer");
+
+var transporter = nodemailer.createTransport({
+  service: "gmail",
+  auth: {
+    user: process.env.MAIL_USER,
+    pass: process.env.MAIL_PASSWORD,
+  },
+});
 
 const { productByID, productsByIDs, userById } = require("./merge");
 
@@ -161,6 +170,21 @@ module.exports = {
         product.available = product.available - 1;
          product.save();
       });
+
+      //Send Mail
+      var mailOptions = {
+        from: process.env.MAIL_USER,
+        to: user.email,
+        subject: "Order Placed",
+        html: "<h1>Your Order Placed Successfully</h1>",
+      };
+
+      transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+          throw new Error(error);
+        }
+      });
+
       return transfromUserProducts(order);
     } catch (e) {
       throw new Error(e);
