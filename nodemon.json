@@ -2,6 +2,8 @@
     "env":{
         "MONGO_USER":"omrubik",
         "MONGO_PASSWORD":"om1234",
-        "MONGO_DATABASE":"StoreDB"
+        "MONGO_DATABASE":"StoreDB",
+        "MAIL_USER":"jupiterstorecode@gmail.com",
+        "MAIL_PASSWORD":"jupiterstore"
     }
 }
