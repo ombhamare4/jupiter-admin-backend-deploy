@@ -114,4 +114,22 @@ module.exports = {
       throw new Error(e);
     }
   },
+
+  productByName: async (args) => {
+    try {
+        const ProductsByCollection = await Product.find({
+        "name": { "$regex":args.productName , "$options": "i" },
+        "category":args.collectionName
+      });
+      return ProductsByCollection.map((products)=>{
+        return {
+          ...products._doc,
+          createdAt: new Date(products._doc.createdAt).toISOString(),
+          updatedAt: new Date(products._doc.updatedAt).toISOString(),
+        };
+      })
+    } catch (e) {
+      throw new Error(e);
+    }
+  },
 };

@@ -168,6 +168,7 @@ orders: [Orders!]!
 ship:[Orders!]!
 orderById(orderId:String!): Orders!
 productByCollection(collectionName: String!): [Product]
+productByName(productName:String!,collectionName:String!):[Product]
 
 }
 
