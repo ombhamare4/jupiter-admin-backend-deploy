@@ -40,7 +40,7 @@ input UpdateOrder{
 
 type Orders{
   _id: ID!
-  user: User!
+  user: User
   name: Name!
   address:  Address!
   orderProducts: [OrdersProductList!]!

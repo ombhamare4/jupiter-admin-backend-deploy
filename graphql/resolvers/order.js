@@ -27,7 +27,6 @@ const transfromUserProducts = (order) => {
 module.exports = {
   orders: async () => {
     const orders = await Order.find({ orderStatus: false });
-    // console.log(orders);
     const orderlist = orders.map((order) => {
       return transfromUserProducts(order);
     });
@@ -36,7 +35,6 @@ module.exports = {
 
   ship: async () => {
     const orders = await Order.find({ orderStatus: true });
-    // console.log(orders);
     const orderlist = orders.map((order) => {
       return transfromUserProducts(order);
     });
